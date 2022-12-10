@@ -1,4 +1,4 @@
-package Entities;
+package firstConcepts.Entities;
 
 public enum OrderStatus {
     PENDING_PAYMENT,
