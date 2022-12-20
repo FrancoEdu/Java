@@ -31,12 +31,7 @@ public class Account {
     }
 
     public void withdraw(Double amount){
-        if(balance < 1){
-            System.out.println("Saldo insuficente");
-        }
-        else{
-            balance = balance - amount;
-        }
+            balance = balance - amount - 5;
     }
 
     public void deposit(Double amount){
