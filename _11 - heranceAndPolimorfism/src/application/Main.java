@@ -29,5 +29,19 @@ public class Main {
             account5.updateBalance();
             System.out.println("Update!");
         }
+
+        //Learning @Override
+        Account account5 = new Account(1005, "Eduardo", 1000.0);
+        account5.withdraw(200.0);
+        System.out.println(account5.getBalance());
+
+        //@Override class SavingsAccount
+        Account account6 = new SavingsAccount(1006, "Sandra", 1000.0, 1.0);
+        account6.withdraw(200.0);
+        System.out.println(account6.getBalance());
+
+        //@Override class BusinessAccount
+        Account account7 = new BusinessAccount(1007,"Carlos", 1000.0,200.0);
+
     }
 }
