@@ -17,4 +17,23 @@ public class Account {
     public String getHolder(){
         return this.holder;
     }
+    public Double getBalance(){
+        return this.balance;
+    }
+    public Integer getNumber() {
+        return this.number;
+    }
+
+    public void withdraw(Double amount){
+        if(balance < 1){
+            System.out.println("Saldo insuficente");
+        }
+        else{
+            balance = balance - amount;
+        }
+    }
+
+    public void deposit(Double amount){
+        balance = balance + amount;
+    }
 }
