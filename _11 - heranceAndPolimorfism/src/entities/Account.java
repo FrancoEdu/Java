@@ -3,8 +3,11 @@ package entities;
 public class Account {
     private Integer number;
     private String holder;
-    private Double balance;
+    protected Double balance;
 
+    public Account(){
+
+    }
     public Account (Integer number, String holder, Double balance){
         this.number = number;
         this.holder = holder;
@@ -22,6 +25,9 @@ public class Account {
     }
     public Integer getNumber() {
         return this.number;
+    }
+    public void setNumber(Integer number){
+        this.number = number;
     }
 
     public void withdraw(Double amount){
