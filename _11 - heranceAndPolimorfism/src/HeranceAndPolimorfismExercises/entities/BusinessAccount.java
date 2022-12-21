@@ -1,4 +1,4 @@
-package entities;
+package HeranceAndPolimorfismExercises.entities;
 
 public class BusinessAccount extends Account{
     private Double loanlimit;

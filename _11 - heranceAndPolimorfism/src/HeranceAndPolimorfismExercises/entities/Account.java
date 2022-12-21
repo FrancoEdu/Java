@@ -1,4 +1,4 @@
-package entities;
+package HeranceAndPolimorfismExercises.entities;
 
 public class Account {
     private Integer number;

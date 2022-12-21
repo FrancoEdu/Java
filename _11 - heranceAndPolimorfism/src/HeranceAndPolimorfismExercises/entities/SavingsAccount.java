@@ -1,4 +1,4 @@
-package entities;
+package HeranceAndPolimorfismExercises.entities;
 
 public class SavingsAccount extends Account{
     private Double interestRate;

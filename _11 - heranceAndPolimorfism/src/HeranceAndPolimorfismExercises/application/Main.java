@@ -1,8 +1,8 @@
-package application;
+package HeranceAndPolimorfismExercises.application;
 
-import entities.Account;
-import entities.BusinessAccount;
-import entities.SavingsAccount;
+import HeranceAndPolimorfismExercises.entities.Account;
+import HeranceAndPolimorfismExercises.entities.BusinessAccount;
+import HeranceAndPolimorfismExercises.entities.SavingsAccount;
 
 public class Main {
     public static void main(String[] args) {
@@ -33,15 +33,20 @@ public class Main {
         //Learning @Override
         Account account5 = new Account(1005, "Eduardo", 1000.0);
         account5.withdraw(200.0);
+        System.out.println("Learning @Override");
         System.out.println(account5.getBalance());
 
         //@Override class SavingsAccount
         Account account6 = new SavingsAccount(1006, "Sandra", 1000.0, 1.0);
         account6.withdraw(200.0);
+        System.out.println("@Override class SavingsAccount");
         System.out.println(account6.getBalance());
 
         //@Override class BusinessAccount
         Account account7 = new BusinessAccount(1007,"Carlos", 1000.0,200.0);
+        account7.withdraw(200.00);
+        System.out.println("@Override class BusinessAccount");
+        System.out.println(account7.getBalance());
 
     }
 }
