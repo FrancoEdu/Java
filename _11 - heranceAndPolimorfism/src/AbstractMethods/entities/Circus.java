@@ -16,4 +16,9 @@ public class Circus extends Shape{
     public void setRadius(Double radius) {
         this.radius = radius;
     }
+
+    @Override
+    public Double area(){
+        return 3.14 * (radius * radius);
+    }
 }
