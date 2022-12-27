@@ -37,7 +37,7 @@ public class Main {
                 list.add(new Circus(color,radius));
             }
         }
-        
+
         System.out.println("");
         System.out.println("SHAPE AREA: ");
         for (Shape sha:list){
