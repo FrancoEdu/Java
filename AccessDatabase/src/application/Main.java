@@ -2,6 +2,7 @@ package application;
 
 import db.DB;
 import db.DbException;
+import db.DbIntegrityException;
 
 import java.sql.*;
 import java.text.ParseException;
@@ -71,7 +72,7 @@ public class Main {
         try{
             conn = DB.getConnection();
 
-            preparedStatement = conn.prepareStatement("UPDATE seller SET BaseSalary = BaseSalary + ? Where (DepartmentId = ?)");
+            preparedStatement = conn.prepareStatement("UPDATE seller SET BaseSalary = BaseSalary + ? WHERE (DepartmentId = ?)");
             preparedStatement.setDouble(1,200.0);
             preparedStatement.setInt(2,2);
 
@@ -86,6 +87,25 @@ public class Main {
         }
         */
 
+        // ================================================== DELETAR DADOS NO BANCO =====================================
+        /*
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
 
+        try{
+            conn = DB.getConnection();
+            preparedStatement = conn.prepareStatement("DELETE FROM department WHERE Id = ?");
+            preparedStatement.setInt(1,5);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            System.out.println("Done ! \n Rows affected: " + rowsAffected);
+        }catch (SQLException e){
+            throw new DbIntegrityException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(preparedStatement);
+            DB.closeConnection();
+        }
+        */
     }
 }
