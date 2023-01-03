@@ -107,5 +107,36 @@ public class Main {
             DB.closeConnection();
         }
         */
+        // ================================================== TRANSAÇÃO DADOS NO BANCO =====================================
+
+        Connection connection = null;
+        Statement statement = null;
+
+
+
+        try {
+            connection = DB.getConnection();
+            connection.setAutoCommit(false); //protege a transação de alterações
+            statement = connection.createStatement();
+
+            int rowsOne = statement.executeUpdate("UPDATE seller SET BaseSalary = 2090 WHERE DepartmentId = 1");
+            int rowsTwo = statement.executeUpdate("UPDATE seller SET BaseSalary = 3090 WHERE DepartmentId = 2");
+
+            connection.commit(); //encerra aqui a proteção
+
+            System.out.println("Rows 1 = " + rowsOne);
+            System.out.println("Rows 2 = " + rowsTwo);
+
+        }catch (SQLException e){
+            try {
+                connection.rollback();//volta ao estado inicial do banco caso seja encontrado alguma exceção durante a execução do codigo
+                throw new DbException("Transaction rolled back !! \n Caused by " + e.getMessage());
+            } catch (SQLException ex) {
+                throw new DbException("Error trying to rollback \n Caused by " + ex.getMessage());
+            }
+        }finally {
+            DB.closeStatement(statement);
+            DB.closeConnection();
+        }
     }
 }
