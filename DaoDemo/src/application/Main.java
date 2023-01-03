@@ -11,10 +11,9 @@ import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Department obj = new Department(1,"Computers");
-
         SellerDao sellerDao = DaoFactory.createSellerDao();
+
+        System.out.println("================= 1st TEST =================");
         Seller seller = sellerDao.findById(3);
 
         System.out.println(seller);
