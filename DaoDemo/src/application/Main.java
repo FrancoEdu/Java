@@ -24,5 +24,15 @@ public class Main {
         for (Seller obj :list){
             System.out.println(obj);
         }
+
+        System.out.println("=================3rd TEST =================");
+        list = sellerDao.findAll();
+        for (Seller obj :list){
+            System.out.println(obj);
+        }
+
+        System.out.println("=================4th TEST =================");
+        Seller newSeller = new Seller(null,"Leticia Zancani","leticiazancani@gmail.com",new Date(),2300.0,department);
+        sellerDao.insert(newSeller);
     }
 }

@@ -6,10 +6,7 @@ import model.Dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,15 +18,45 @@ public class SellerDaoJDBC implements SellerDao {
         this.conn = conn;
     }
     @Override
-    public void insert(SellerDao obj) {
+    public void insert(Seller obj) {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try{
+            preparedStatement = conn.prepareStatement("INSERT INTO seller " +
+                    "(Name, Email, BirthDate, BaseSalary, DepartmentId) " +
+                    "VALUES (?, ?, ?, ?, ?)" , Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, obj.getName());
+            preparedStatement.setString(2, obj.getEmail());
+            preparedStatement.setDate(3,new java.sql.Date(obj.getBirthDate().getTime()));
+            preparedStatement.setDouble(4,obj.getBaseSalary());
+            preparedStatement.setInt(5,obj.getDepartment().getId());
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0){
+                resultSet = preparedStatement.getGeneratedKeys();
+                if (resultSet.next()){
+                    int id = resultSet.getInt(1);
+                    obj.setId(id);
+                }
+            }else{
+                throw new DbException("Nenhuma linha alterada!");
+            }
+
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally{
+            DB.closeStatement(preparedStatement);
+            DB.closeResulSet(resultSet);
+        }
+    }
+    @Override
+    public void update(Seller obj) {
 
     }
     @Override
-    public void update(SellerDao obj) {
-
-    }
-    @Override
-    public void deleteById(SellerDao id) {
+    public void deleteById(Seller id) {
 
     }
     @Override
@@ -60,7 +87,36 @@ public class SellerDaoJDBC implements SellerDao {
 
     @Override
     public List<Seller> findAll() {
-        return null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement("SELECT seller.*,department.Name as DepName " +
+                    "FROM seller INNER JOIN department " +
+                    "ON seller.DepartmentId = department.Id " +
+                    "ORDER BY Name");
+
+            rs = st.executeQuery();
+            List<Seller> list = new ArrayList<>();
+            Map<Integer, Department> map = new HashMap<>();
+
+            while (rs.next()){
+                Department dep = map.get(rs.getInt("DepartmentId")); // retorna null se o departamento ainda não existir
+
+                if(dep == null){
+                    dep = instantiateDepartment(rs); //instanciando departamento
+                    map.put(rs.getInt("DepartmentId"),dep);
+                }
+                Seller seller = instantiateSeller(rs, dep); //instanciando Vendedor
+                list.add(seller);
+            }
+            return list;
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+            DB.closeResulSet(rs);
+        }
     }
 
     @Override
