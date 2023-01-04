@@ -34,5 +34,11 @@ public class Main {
         System.out.println("=================4th TEST =================");
         Seller newSeller = new Seller(null,"Leticia Zancani","leticiazancani@gmail.com",new Date(),2300.0,department);
         sellerDao.insert(newSeller);
+
+        System.out.println("=================4th TEST =================");
+        seller = sellerDao.findById(1);
+        seller.setName("Martha Waine");
+        sellerDao.update(seller);
+        System.out.println("Updated !");
     }
 }
