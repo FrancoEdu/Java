@@ -13,7 +13,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         SellerDao sellerDao = DaoFactory.createSellerDao();
-
+        /*
         System.out.println("================= 1st TEST =================");
         Seller seller = sellerDao.findById(3);
         System.out.println(seller);
@@ -35,10 +35,17 @@ public class Main {
         Seller newSeller = new Seller(null,"Leticia Zancani","leticiazancani@gmail.com",new Date(),2300.0,department);
         sellerDao.insert(newSeller);
 
-        System.out.println("=================4th TEST =================");
+        System.out.println("=================5th TEST =================");
         seller = sellerDao.findById(1);
         seller.setName("Martha Waine");
         sellerDao.update(seller);
         System.out.println("Updated !");
+
+        System.out.println("=================6th TEST =================");
+        sellerDao.deleteById(45);
+        System.out.println("Updated !");
+         */
+
+
     }
 }
